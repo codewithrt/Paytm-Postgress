@@ -23,7 +23,8 @@ router.post("/signup", async (req: any, res: any) => {
         res.status(411).json({ message: "Email already Exist!!! / Incorrect Inputs" });
         return;
     }
-    const username = req.body.params.username;
+    // const username = req.body.params.username;
+    const username = req.body.username;
     const isUser = await prisma.user.findUnique({
         where: {
             username: username
@@ -39,9 +40,12 @@ router.post("/signup", async (req: any, res: any) => {
     const user = await prisma.user.create({
         data: {
             username: username,
-            password: req.body.params.password,
-            firstName: req.body.params.firstName,
-            lastName: req.body.params.lastName,
+            // password: req.body.params.password,
+            // firstName: req.body.params.firstName,
+            // lastName: req.body.params.lastName,
+            password: req.body.password,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
             account: {
                 create: {
                     Balance: 1 + Math.random() * 10000
